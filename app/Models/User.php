@@ -3,17 +3,16 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Str;
-use Spatie\Permission\Traits\HasRoles;
-use Spatie\Permission\Models\Role;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasRoles;
+    use HasFactory, Notifiable, HasRoles, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -24,11 +23,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'profile_photo',
-        'phone',
-        'role',
-        'enterprise_id',
-        'status',
     ];
 
     /**
@@ -54,22 +48,14 @@ class User extends Authenticatable
         ];
     }
 
-    /**
-     * Get the user's initials
-     */
-    public function initials(): string
+    // Relationships
+    public function company()
     {
-        return Str::of($this->name)
-            ->explode(' ')
-            ->map(fn(string $name) => Str::of($name)->substr(0, 1))
-            ->implode('');
-    }
-    public function enterprise()
-    {
-        return $this->belongsTo(Enterprise::class);
+        return $this->belongsTo(Company::class);
     }
 
-    public function roles() {
-        return $this->belongsToMany(Role::class);
+    public function employee()
+    {
+        return $this->hasOne(Employee::class);
     }
 }
