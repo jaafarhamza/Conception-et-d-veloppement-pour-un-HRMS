@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('departments', function (Blueprint $table) {
+        Schema::create('documents', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description')->nullable();
             $table->foreignId('company_id')->constrained();
-            $table->foreignId('manager_id')->nullable()->references('id')->on('employees');
-            $table->softDeletes();
+            $table->foreignId('employee_id')->nullable()->constrained();
+            $table->string('title');
+            $table->enum('type', ['contract', 'payslip', 'certification', 'other']);
+            $table->string('file_path');
+            $table->enum('visibility', ['public', 'private', 'restricted']);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('departments');
+        Schema::dropIfExists('documents');
     }
 };

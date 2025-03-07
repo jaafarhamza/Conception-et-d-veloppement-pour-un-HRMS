@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\conge>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Career_evolution>
  */
-class CongeFactory extends Factory
+class CareerEvolutionFactory extends Factory
 {
     /**
      * Define the model's default state.

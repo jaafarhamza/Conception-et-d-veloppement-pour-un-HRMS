@@ -2,69 +2,106 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
 
 class RoleAndPermissionSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run()
     {
-        $roles = [
-            'admin' => 'Full Management',
-            'hr' => 'Human Resources',
-            'manager' => 'Department Manager',
-            'employee' => 'Employee'
-        ];
-
-        foreach ($roles as $key => $description) {
-            Role::create(['name' => $key, 'description' => $description]);
-        }
+        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         $permissions = [
-            'company.view', 'company.create', 'company.update', 'company.delete',
-            
-            'employee.view', 'employee.create', 'employee.update', 'employee.delete',
-            
-            'department.view', 'department.create', 'department.update', 'department.delete',
-            
-            'leave.view', 'leave.create', 'leave.approve', 'leave.reject',
-            
-            'view.hierarchy', 'update.hierarchy', 'view.reports'
+            // Company Management
+            'manage-company-settings',
+            'view-company-info',
+            'edit-company-info',
+
+            // User Management
+            'manage-users',
+            'create-user',
+            'edit-user',
+            'delete-user',
+            'view-users',
+
+            // Employee Management
+            'manage-employees',
+            'create-employee',
+            'edit-employee',
+            'delete-employee',
+            'view-employees',
+            'view-employee-details',
+            'manage-employee-salary',
+            'view-employee-documents',
+
+            // Department Management
+            'manage-departments',
+            'create-department',
+            'edit-department',
+            'delete-department',
+            'view-departments',
+            'manage-department-hierarchy',
+
+            // Document Management
+            'manage-documents',
+            'upload-documents',
+            'delete-documents',
+            'view-documents',
+
+            // Career Management
+            'manage-career-evolution',
+            'create-promotion',
+            'approve-promotion',
+            'view-career-history'
         ];
 
         foreach ($permissions as $permission) {
             Permission::create(['name' => $permission]);
         }
+        $roles = [
+            'super-admin' => [
+                '*'
+            ],
+            'company-admin' => [
+                'manage-company-settings',
+                'view-company-info',
+                'edit-company-info',
+                'manage-users',
+                'manage-employees',
+                'manage-departments',
+                'manage-documents',
+                'manage-career-evolution'
+            ],
+            'hr-manager' => [
+                'view-company-info',
+                'manage-employees',
+                'view-departments',
+                'manage-documents',
+                'manage-career-evolution'
+            ],
+            'department-manager' => [
+                'view-company-info',
+                'view-employees',
+                'view-employee-details',
+                'view-departments',
+                'view-documents',
+                'create-promotion'
+            ],
+            'employee' => [
+                'view-company-info',
+                'view-employee-details',
+                'view-documents'
+            ]
+        ];
 
-        // Admin role 
-        $adminRole = Role::findByName('admin');
-        $adminRole->givePermissionTo(Permission::all());
-
-        // HR role
-        $hrRole = Role::findByName('hr');
-        $hrRole->givePermissionTo([
-            'employee.view', 'employee.create', 'employee.update', 'employee.delete',
-            'department.view', 'department.create', 'department.update', 'department.delete',
-            'conge.view', 'conge.approve', 'conge.reject',
-            'view.hierarchy', 'update.hierarchy', 'view.reports'
-        ]);
-
-        // Manager role
-        $managerRole = Role::findByName('manager');
-        $managerRole->givePermissionTo([
-            'employee.view', 'department.view', 'conge.view', 'conge.approve', 'conge.reject',
-            'view.hierarchy', 'view.reports'
-        ]);
-
-        // Employee role
-        $employeeRole = Role::findByName('employee');
-        $employeeRole->givePermissionTo([
-            'conge.create', 'conge.view'
-        ]);
+        foreach ($roles as $roleName => $permissions) {
+            $role = Role::create(['name' => $roleName]);
+            if ($permissions[0] === '*') {
+                $role->givePermissionTo(Permission::all());
+            } else {
+                $role->givePermissionTo($permissions);
+            }
+        }
     }
 }

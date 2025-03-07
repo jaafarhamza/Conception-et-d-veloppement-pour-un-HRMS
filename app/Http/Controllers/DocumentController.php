@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CongeBalance;
-use App\Http\Requests\StoreCongeBalanceRequest;
-use App\Http\Requests\UpdateCongeBalanceRequest;
+use App\Models\Document;
+use App\Http\Requests\StoreDocumentRequest;
+use App\Http\Requests\UpdateDocumentRequest;
 
-class CongeBalanceController extends Controller
+class DocumentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class CongeBalanceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCongeBalanceRequest $request)
+    public function store(StoreDocumentRequest $request)
     {
         //
     }
@@ -35,7 +35,7 @@ class CongeBalanceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CongeBalance $congeBalance)
+    public function show(Document $document)
     {
         //
     }
@@ -43,7 +43,7 @@ class CongeBalanceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CongeBalance $congeBalance)
+    public function edit(Document $document)
     {
         //
     }
@@ -51,7 +51,7 @@ class CongeBalanceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCongeBalanceRequest $request, CongeBalance $congeBalance)
+    public function update(UpdateDocumentRequest $request, Document $document)
     {
         //
     }
@@ -59,7 +59,7 @@ class CongeBalanceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CongeBalance $congeBalance)
+    public function destroy(Document $document)
     {
         //
     }

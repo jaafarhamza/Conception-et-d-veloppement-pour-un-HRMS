@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\conge;
-use App\Http\Requests\StorecongeRequest;
-use App\Http\Requests\UpdatecongeRequest;
+use App\Models\Career_evolution;
+use App\Http\Requests\StoreCareer_evolutionRequest;
+use App\Http\Requests\UpdateCareer_evolutionRequest;
 
-class CongeController extends Controller
+class CareerEvolutionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class CongeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorecongeRequest $request)
+    public function store(StoreCareer_evolutionRequest $request)
     {
         //
     }
@@ -35,7 +35,7 @@ class CongeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(conge $conge)
+    public function show(Career_evolution $career_evolution)
     {
         //
     }
@@ -43,7 +43,7 @@ class CongeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(conge $conge)
+    public function edit(Career_evolution $career_evolution)
     {
         //
     }
@@ -51,7 +51,7 @@ class CongeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatecongeRequest $request, conge $conge)
+    public function update(UpdateCareer_evolutionRequest $request, Career_evolution $career_evolution)
     {
         //
     }
@@ -59,7 +59,7 @@ class CongeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(conge $conge)
+    public function destroy(Career_evolution $career_evolution)
     {
         //
     }

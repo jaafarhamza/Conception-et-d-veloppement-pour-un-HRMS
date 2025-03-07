@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\CongeBalance;
+use App\Models\Career_evolution;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class CongeBalancePolicy
+class CareerEvolutionPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -19,7 +19,7 @@ class CongeBalancePolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, CongeBalance $congeBalance): bool
+    public function view(User $user, Career_evolution $careerEvolution): bool
     {
         return false;
     }
@@ -35,7 +35,7 @@ class CongeBalancePolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, CongeBalance $congeBalance): bool
+    public function update(User $user, Career_evolution $careerEvolution): bool
     {
         return false;
     }
@@ -43,7 +43,7 @@ class CongeBalancePolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, CongeBalance $congeBalance): bool
+    public function delete(User $user, Career_evolution $careerEvolution): bool
     {
         return false;
     }
@@ -51,7 +51,7 @@ class CongeBalancePolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, CongeBalance $congeBalance): bool
+    public function restore(User $user, Career_evolution $careerEvolution): bool
     {
         return false;
     }
@@ -59,7 +59,7 @@ class CongeBalancePolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, CongeBalance $congeBalance): bool
+    public function forceDelete(User $user, Career_evolution $careerEvolution): bool
     {
         return false;
     }
