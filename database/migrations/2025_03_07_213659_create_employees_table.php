@@ -24,7 +24,6 @@ return new class extends Migration
             $table->date('contract_end_date')->nullable();
             $table->decimal('salary', 10, 2);
             $table->string('position');
-            $table->json('additional_info')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
